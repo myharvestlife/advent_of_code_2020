@@ -12,4 +12,8 @@ pub mod input_converter {
 
         return rows.iter().map(|r| r.chars().collect()).collect();
     }
+
+    pub fn to_string_vec(input: String) -> Vec<String> {
+        return input.split("\n").filter(|n| n.len() > 0).map(|s| s.to_string()).collect();
+    }
 }

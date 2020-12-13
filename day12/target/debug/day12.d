@@ -1,0 +1,1 @@
+/home/jason/Projects/AdventOfCode2020/day12/target/debug/day12: /home/jason/Projects/AdventOfCode2020/day12/src/directions.rs /home/jason/Projects/AdventOfCode2020/day12/src/main.rs /home/jason/Projects/AdventOfCode2020/utils/src/lib.rs
