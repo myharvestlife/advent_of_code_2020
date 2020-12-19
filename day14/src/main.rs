@@ -1,6 +1,7 @@
 use std::env;
 use std::fs;
 use utils::input_converter;
+use std::collections::HashMap;
 
 mod mask;
 use mask::*;
@@ -32,21 +33,45 @@ fn part1(input: String) {
 
     let mut mem = Memory {
         mask: ['0'; 36].to_vec(),
-        memory: [0; 36],
+        memory: HashMap::new(),
     };
 
     for line in lines {
-        if parser::is_mask(line) {
-            let mask = parser::get_mask(line);
+        if parser::is_mask(line.clone()) {
+            let mask = parser::get_mask(line.clone());
 
-            // make it start from the 0 index on the left by reversing
+            // Reverse so 0 index is the least important bit
             mem.mask = mask.chars().rev().collect();
         } else {
             let (mem_loc, mem_val) = parser::get_mem(line);
 
-
+            update_memory(&mut mem, mem_loc, mem_val);
         }
     }
+
+    println!("Total Sum of All Addresses is: {}", mem.get_total());
 }
 
-fn part2(input: String) {}
+fn part2(input: String) {
+    let lines = input_converter::to_string_vec(input);
+
+    let mut mem = Memory {
+        mask: ['0'; 36].to_vec(),
+        memory: HashMap::new(),
+    };
+
+    for line in lines {
+        if parser::is_mask(line.clone()) {
+            let mask = parser::get_mask(line.clone());
+
+            // Reverse so 0 index is the least important bit
+            mem.mask = mask.chars().rev().collect();
+        } else {
+            let (mem_loc, mem_val) = parser::get_mem(line);
+
+            update_memory2(&mut mem, mem_loc, mem_val);
+        }
+    }
+
+    println!("Total Sum of All Addresses is: {}", mem.get_total());
+}
